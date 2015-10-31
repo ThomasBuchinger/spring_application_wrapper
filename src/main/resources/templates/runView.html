@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,10 +12,8 @@
 
 	<!-- Bootstrap Core CSS -->
 	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
-
 	<!-- Custom CSS -->
 	<link th:href="@{css/sb-admin.css}" rel="stylesheet" />
-
 	<!-- Custom Fonts -->
 	<link th:href="@{font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
 
@@ -26,18 +23,26 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	
+	<!-- jQuery -->
+	<script th:src="@{js/jquery.js}"></script>
+	
+	<!-- Bootstrap Core JavaScript -->
+	<script th:src="@{js/bootstrap.min.js}"></script>
 </head>
 
 <body>
 <div id="wrapper">
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" th:fragment="nav">
-		<div th:replace="fragments/blank_page :: branding"/>
-		<div th:replace="fragments/blank_page :: user-menu"/>
-		<div th:replace="fragments/blank_page :: nav-side"/>
+		<div th:replace="fragments/brand :: brand"/>
+		<div th:replace="fragments/user-menu :: user-menu"/>
+		<div th:replace="fragments/static-nav :: nav-side" />
 	</nav>
 	<div id="page-wrapper">
 	<div class="container-fluid">
-		<ol th:replace="fragments/blank_page :: breadcrumb" />
+		<ol th:replace="fragments/breadcrumb :: breadcrumb" />
+		
+		
 		<!-- Page Heading -->
 		<div class="row">
 			<h1 class="page-header">Application Wrapper
@@ -67,11 +72,6 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script th:src="@{js/jquery.js}"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script th:src="@{js/bootstrap.min.js}"></script>
 
 </body>
 
