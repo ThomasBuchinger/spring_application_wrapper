@@ -1,0 +1,12 @@
+<div class="collapse navbar-collapse navbar-ex1-collapse" th:fragment="nav-side">
+	
+	<ul th:fragment="fragment_node(node)" th:unless="${#lists.isEmpty(node.children)}" class="nav side-nav">
+		<li th:each="child : ${node.children}" th:inline="text"> 
+			<i class="fa fa-fw fa-dashboard"></i>
+			[[${child.name}]]
+			<!-- Recursion is broken in this Version of the templating engine -->
+			<!--<ul th:replace="this::fragment_node(${child})" class="nav side-nav"></ul>-->
+		</li>
+	</ul>
+	
+</div>

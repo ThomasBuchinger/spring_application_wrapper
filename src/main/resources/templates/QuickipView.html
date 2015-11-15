@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+
+	<title>BUC - Quick IP</title>
+
+	<!-- Bootstrap Core CSS -->
+	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+	<!-- Custom CSS -->
+	<link th:href="@{css/sb-admin.css}" rel="stylesheet" />
+	<!-- Custom Fonts -->
+	<link th:href="@{font-awesome/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	<!-- jQuery -->
+	<script th:src="@{js/jquery.js}"></script>
+	
+	<!-- Bootstrap Core JavaScript -->
+	<script th:src="@{js/bootstrap.min.js}"></script>
+	
+	
+	<!-- Editable Grid -->
+	<script th:src="@{editablegrid-master/editablegrid.js}"></script>
+	<!-- [DO NOT DEPLOY] --> <script th:src="@{editablegrid-master/editablegrid_renderers.js}" ></script>
+	<!-- [DO NOT DEPLOY] --> <script th:src="@{editablegrid-master/editablegrid_editors.js}" ></script>
+	<!-- [DO NOT DEPLOY] --> <script th:src="@{editablegrid-master/editablegrid_validators.js}" ></script>
+	<!-- [DO NOT DEPLOY] --> <script th:src="@{editablegrid-master/editablegrid_utils.js}" ></script>
+	<!-- [DO NOT DEPLOY] --> <script th:src="@{editablegrid-master/editablegrid_charts.js}" ></script>
+	<link rel="stylesheet" th:href="@{editablegrid-master/editablegrid.css}" type="text/css" media="screen"></link>
+	<style>
+		a { color: #548dc4; text-decoration: none; }
+		a:hover { text-decoration: underline; }
+		table.testgrid { border-collapse: collapse; border: 1px solid #CCB; width: 800px; }
+		table.testgrid td, table.testgrid th { padding: 5px; border: 1px solid #E0E0E0; }
+		table.testgrid th { background: #E5E5E5; text-align: left; }
+		input.invalid { background: red; color: #FDFDFD; }
+	</style>
+	
+	<script th:inline="text">
+		window.onload = function() {
+			/*<![CDATA[*/
+			var metadata = [];
+			metadata.push({ name: "name", label: "Interface", datatype: "string", editable: false });
+			metadata.push({ name: "ip", label: "IP Address", datatype: "string", editable: true });
+			metadata.push({ name: "mask", label: "Mask", datatype: "integer", editable: true });
+			metadata.push({ name: "active", label: "Active", datatype: "boolean", editable: true });
+			metadata.push({ name: "connected", label: "Connected", datatype: "boolean", editable: false });
+			metadata.push({ name: "gateway", label: "Gateway", datatype: "string", editable: true });
+			metadata.push({ name: "dns", label: "DNS-Server", datatype: "string", editable: true });
+			metadata.push({ name: "action", label: "Action", datatype: "html", editable: false });
+			var data = [];
+			data.push({id:"[[${iface.name}]]", values: { name:"[[${iface.name}]]", ip:"[[${iface.ip}]]", mask:"[[${iface.mask}]]", active:"[[${iface.active}]]", connected:"[[${iface.connected}]]", action:"[[${iface.action}]]", gateway:"[[${iface.gateway}]]", dns:"[[${iface.dnsServer}]]" }});
+			/*]]>*/		
+			editableGrid = new EditableGrid("DemoGridJsData");
+			editableGrid.load({"metadata": metadata, "data": data});
+			editableGrid.renderGrid("iface_table", "testgrid");
+		}
+
+	</script>
+	
+</head>
+
+<body>
+<div id="wrapper">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" th:fragment="nav">
+		<div th:replace="fragments/brand :: brand"/>
+		<div th:replace="fragments/user-menu :: user-menu"/>
+		<div th:replace="fragments/static-nav :: nav-side" />
+	</nav>
+	<div id="page-wrapper">
+	<div class="container-fluid">
+		<ol th:replace="fragments/breadcrumb :: breadcrumb" />
+		
+		
+		<!-- Page Heading -->
+		<div class="row">
+			<h1 class="page-header">Quick IP
+					<small>...</small>
+			</h1>
+		</div>
+		<!-- /.row -->
+		
+		<label>Interfaces:</label> <br />
+		<div id="iface_table"></div>
+		
+		<label>Routing: </label> <br />
+		
+	</div>
+	<!-- /.container-fluid -->
+	</div>
+	<!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+
+</body>
+
+</html>

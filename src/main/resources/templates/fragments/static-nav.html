@@ -1,0 +1,20 @@
+<div class="collapse navbar-collapse navbar-ex1-collapse" th:fragment="nav-side">
+	<ul class="nav navbar-nav side-nav">
+		<li>
+			<a th:href="@{index.html}"><i class="fa fa-fw fa-dashboard"></i>Home</a>
+		</li>
+		<li>
+			<label>Applications</label>
+		</li>
+		<li th:each="child : ${apps.children}" th:inline="text"> 
+			<a th:href="${child.href}"><i class="fa fa-fw fa-desktop"></i> [[${child.name}]] </a>
+		</li>
+		<li>
+			<label>Endpoints</label>
+		</li>
+		<li th:each="child : ${endpoints.children}" th:inline="text"> 
+			<a th:href="${child.href}"><i class="fa fa-fw fa-wrench"></i> [[${child.name}]] </a>
+		</li>
+	</ul>
+</div>
+<!-- /.navbar-collapse -->	
