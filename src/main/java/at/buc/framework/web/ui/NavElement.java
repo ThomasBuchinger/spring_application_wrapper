@@ -1,6 +1,6 @@
-package at.buc.web.ui;
+package at.buc.framework.web.ui;
 
-import at.buc.utils.TreeNode;
+import at.buc.framework.utils.TreeNode;
 
 public class NavElement extends TreeNode{
 	private String href;

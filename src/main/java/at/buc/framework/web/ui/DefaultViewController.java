@@ -1,4 +1,4 @@
-package at.buc.web.ui;
+package at.buc.framework.web.ui;
 
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import at.buc.utils.TreeNode;
+import at.buc.framework.utils.TreeNode;
 
 
 @Controller
@@ -24,7 +24,9 @@ public class DefaultViewController {
 					.addNode(new NavElement("Quick IP", "/quickip")))
 			.addNode(new NavElement("Endpoints", "")
 					.addNode(new NavElement("Application Wrapper REST-API","api/exec?cmd=cmd /version"))
-					.addNode(new NavElement("Quickip REST-API","api/quickip")))
+					.addNode(new NavElement("Quickip REST-API","api/quickip"))
+					.addNode(new NavElement("QuickIP Iface Table", "/api/quickip/grid/iface"))
+					.addNode(new NavElement("QuickIP Route Table", "/api/quickip/grid/route")))
 			;
 		return root;
 	}

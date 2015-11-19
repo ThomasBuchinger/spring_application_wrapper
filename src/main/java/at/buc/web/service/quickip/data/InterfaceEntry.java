@@ -1,17 +1,20 @@
-package at.buc.web.service.quickip;
+package at.buc.web.service.quickip.data;
+
+import java.util.HashMap;
 
 public class InterfaceEntry {
-	private String name;
+	private final  String name;
 	private String ip;
 	private int mask;
 	private boolean active;
-	private boolean connected;
+	private boolean dhcp_enabled;
+	private final boolean connected;
 	
 	private String gateway;
 	private String [] dnsServer;
 	private String action;
 	
-	public InterfaceEntry(String name, String ip, int mask, boolean active, boolean connected, String gateway, String[] dnsserver) {
+	public InterfaceEntry(String name, String ip, int mask, boolean active, boolean connected, String gateway, String[] dnsserver, String action) {
 		this.name=name;
 		this.ip=ip;
 		this.mask=mask;
@@ -27,9 +30,6 @@ public class InterfaceEntry {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getIp() {
 		return ip;
@@ -59,9 +59,6 @@ public class InterfaceEntry {
 		return connected;
 	}
 
-	public void setConnected(boolean connected) {
-		this.connected = connected;
-	}
 
 	public String getGateway() {
 		return gateway;
@@ -83,5 +80,4 @@ public class InterfaceEntry {
 	public void setAction(String action) {
 		this.action = action;
 	}
-
 }

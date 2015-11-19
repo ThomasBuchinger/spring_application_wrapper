@@ -1,4 +1,4 @@
-package at.buc.web.service.application_wrapper;
+package at.buc.framework.web.service.application_wrapper;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,4 +23,5 @@ public class MyLogOutputStream extends LogOutputStream {
 		}
 		return sb.toString();
 	}
+	
 }

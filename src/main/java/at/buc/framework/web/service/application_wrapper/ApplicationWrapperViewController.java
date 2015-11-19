@@ -1,4 +1,4 @@
-package at.buc.web.ui;
+package at.buc.framework.web.service.application_wrapper;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import at.buc.web.service.application_wrapper.ApplicationExecutor;
+import at.buc.framework.web.ui.DefaultViewController;
 
 @Controller()
 public class ApplicationWrapperViewController {
@@ -24,8 +24,13 @@ public class ApplicationWrapperViewController {
 		
 		if (cmd != null) {
 			try {
-				model.addAllAttributes(ApplicationExecutor.exec(cmd));
+				ApplicationExecutor exec = new ApplicationExecutor(cmd);
+				exec.startExecute().waitFor();
+				model.addAllAttributes(exec.asMap());
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	

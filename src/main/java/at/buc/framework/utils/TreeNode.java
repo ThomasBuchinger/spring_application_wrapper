@@ -1,4 +1,4 @@
-package at.buc.utils;
+package at.buc.framework.utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -39,35 +39,27 @@
 	<!-- [DO NOT DEPLOY] --> <script th:src="@{editablegrid-master/editablegrid_utils.js}" ></script>
 	<!-- [DO NOT DEPLOY] --> <script th:src="@{editablegrid-master/editablegrid_charts.js}" ></script>
 	<link rel="stylesheet" th:href="@{editablegrid-master/editablegrid.css}" type="text/css" media="screen"></link>
-	<style>
-		a { color: #548dc4; text-decoration: none; }
-		a:hover { text-decoration: underline; }
-		table.testgrid { border-collapse: collapse; border: 1px solid #CCB; width: 800px; }
-		table.testgrid td, table.testgrid th { padding: 5px; border: 1px solid #E0E0E0; }
-		table.testgrid th { background: #E5E5E5; text-align: left; }
-		input.invalid { background: red; color: #FDFDFD; }
-	</style>
-	
-	<script th:inline="text">
-		window.onload = function() {
-			/*<![CDATA[*/
-			var metadata = [];
-			metadata.push({ name: "name", label: "Interface", datatype: "string", editable: false });
-			metadata.push({ name: "ip", label: "IP Address", datatype: "string", editable: true });
-			metadata.push({ name: "mask", label: "Mask", datatype: "integer", editable: true });
-			metadata.push({ name: "active", label: "Active", datatype: "boolean", editable: true });
-			metadata.push({ name: "connected", label: "Connected", datatype: "boolean", editable: false });
-			metadata.push({ name: "gateway", label: "Gateway", datatype: "string", editable: true });
-			metadata.push({ name: "dns", label: "DNS-Server", datatype: "string", editable: true });
-			metadata.push({ name: "action", label: "Action", datatype: "html", editable: false });
-			var data = [];
-			data.push({id:"[[${iface.name}]]", values: { name:"[[${iface.name}]]", ip:"[[${iface.ip}]]", mask:"[[${iface.mask}]]", active:"[[${iface.active}]]", connected:"[[${iface.connected}]]", action:"[[${iface.action}]]", gateway:"[[${iface.gateway}]]", dns:"[[${iface.dnsServer}]]" }});
-			/*]]>*/		
-			editableGrid = new EditableGrid("DemoGridJsData");
-			editableGrid.load({"metadata": metadata, "data": data});
-			editableGrid.renderGrid("iface_table", "testgrid");
-		}
 
+	
+	<script>
+		function loadGrids(){
+			ifacegrid = new EditableGrid("InterfaceGrid"); 
+			ifacegrid.tableLoaded = function() { this.renderGrid("iface_table", "grid"); };
+			ifacegrid.loadJSON("/api/quickip/grid/iface");
+			
+			
+			routegrid = new EditableGrid("InterfaceGrid"); 
+			routegrid.tableLoaded = function() { this.renderGrid("route_table", "grid"); };
+			routegrid.loadJSON("/api/quickip/grid/route");
+		
+		}
+	
+		window.onload = function() {
+			loadGrids()
+		}
+		setInterval(function(){ 
+			loadGrids() 
+		}, 5000);
 	</script>
 	
 </head>
@@ -83,7 +75,6 @@
 	<div class="container-fluid">
 		<ol th:replace="fragments/breadcrumb :: breadcrumb" />
 		
-		
 		<!-- Page Heading -->
 		<div class="row">
 			<h1 class="page-header">Quick IP
@@ -96,6 +87,7 @@
 		<div id="iface_table"></div>
 		
 		<label>Routing: </label> <br />
+		<div id="route_table"></div>
 		
 	</div>
 	<!-- /.container-fluid -->
