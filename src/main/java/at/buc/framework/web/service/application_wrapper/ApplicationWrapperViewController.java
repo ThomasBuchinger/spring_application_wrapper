@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import at.buc.framework.web.ui.DefaultViewController;
+import at.buc.framework.web.service.ui.DefaultViewController;
 
 @Controller()
 public class ApplicationWrapperViewController {

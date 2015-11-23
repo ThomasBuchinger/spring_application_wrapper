@@ -1,4 +1,4 @@
-package at.buc.framework.web.ui;
+package at.buc.framework.web.service.ui;
 
 import at.buc.framework.utils.TreeNode;
 

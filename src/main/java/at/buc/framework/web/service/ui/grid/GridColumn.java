@@ -1,4 +1,4 @@
-package at.buc.framework.web.ui.grid;
+package at.buc.framework.web.service.ui.grid;
 
 public class GridColumn {
 	private final String name;

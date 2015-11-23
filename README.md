@@ -15,18 +15,25 @@ A simple webapplication to change the servers (usually my laptop) IP address. Go
 * Apache Commons Exec
 * Bootstrap (SBAdmin Template)
 * editable-grid
+* XOM
 
 # Stuff to do
 ### Services
 * Embedded REDIS Datastore
-* JavaSpaces (Apache River)
+* JavaSpaces (Apache River, Gigaspace)
 * Elasticsearch (or Lucene?)
 * Spring Data
+* Configuration Management
+* Script Interpreter embedded oin Java (Perl, Python?, Bash, Powershell/cmd)
 
-### Refactoring
+### MISC
 * Making Exec fit for Interactive Process Communication
 * Build a REST API to display Alerts, Navbar und User information on the Default Dashboard (SB-Admin)
 * Rename this repo to something more descriptive
+* Make a lot more use of Spring boot within the framework
+* Add logging
+* Refactor Project (framework) to only start services really in use (Spring-Boot?)
+
 
 # Note
 This project mostly an exercise for webapplications using Spring Framework.

@@ -1,4 +1,4 @@
-package at.buc.framework.web.ui.grid;
+package at.buc.framework.web.service.ui.grid;
 
 import java.util.Map;
 

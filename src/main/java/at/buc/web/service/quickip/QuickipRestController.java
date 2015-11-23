@@ -1,19 +1,21 @@
 package at.buc.web.service.quickip;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import at.buc.framework.web.ui.grid.Grid;
-import at.buc.framework.web.ui.grid.GridColumn;
-import at.buc.framework.web.ui.grid.GridData;
+import at.buc.framework.utils.ObjectManipulation;
+import at.buc.framework.web.service.ui.grid.Grid;
+import at.buc.framework.web.service.ui.grid.GridColumn;
+import at.buc.framework.web.service.ui.grid.GridData;
 import at.buc.web.service.quickip.data.InterfaceEntry;
 import at.buc.web.service.quickip.data.RouteEntry;
-import at.buc.web.service.quickip.data.dao.AbstractInterfaceDaoImpl;
 import at.buc.web.service.quickip.data.dao.InterfaceDao;
-import at.buc.web.service.quickip.data.dao.WmiInterfaceDaoImpl;
+import at.buc.web.service.quickip.data.dao.InterfaceDaoWmiToolImpl;
+import at.buc.web.service.quickip.data.dao.InterfaceDaoWmicImpl;
 
 @RestController
 public class QuickipRestController {
@@ -21,6 +23,31 @@ public class QuickipRestController {
 	@RequestMapping("/api/quickip")
 	public Object get() {
 		return "unfinished - Here should be an HATEOS Endpoint Description pointing to everything that is available as part of Quick IP";
+	}
+	
+	@RequestMapping("/api/quickip/debug")
+	public Object debug_endpoint() {
+		ArrayList<GridColumn> metadata=new ArrayList<>();
+		metadata.add(new GridColumn("NetConnectionID", "Interface", "string", false));
+		metadata.add(new GridColumn("IPAddress", "IP Address", "string", true));
+		metadata.add(new GridColumn("IPSubnet", "Mask", "integer", true));
+		metadata.add(new GridColumn("NetEnabled", "Active", "boolean", true));
+		metadata.add(new GridColumn("Availability", "Connected", "boolean", false));
+		metadata.add(new GridColumn("IPDefaultGateway", "Gateway", "string", false));
+		metadata.add(new GridColumn("DNSName", "DNS Server", "html", false));
+//		metadata.add(new GridColumn("action", " ", "html", false));
+		
+		String[] dns= {"10.0.0.254", "8.8.8.8", "8.8.4.4"};
+		ArrayList<GridData> data=new ArrayList<>();
+		InterfaceDao ifaceDao=new InterfaceDaoWmiToolImpl();
+		for (InterfaceEntry iface : ifaceDao.getAllInterfaces()) {
+			data.add(new GridData("iface_1", ifaceDao.asMap(iface)));
+			
+		}
+//		data.add(new GridData("iface_2", ifaceDao.asMap(new InterfaceEntry("LAN", "10.0.0.2", 24, false, false, "10.0.0.254", dns, "X"))));
+		Grid grid=new Grid(metadata, data);
+		
+		return grid;
 	}
 	
 	@RequestMapping("/api/quickip/grid/iface")
@@ -32,14 +59,18 @@ public class QuickipRestController {
 		metadata.add(new GridColumn("active", "Active", "boolean", true));
 		metadata.add(new GridColumn("connected", "Connected", "boolean", false));
 		metadata.add(new GridColumn("gateway", "Gateway", "string", false));
-		metadata.add(new GridColumn("dnsserver", "DNS Server", "html", false));
-		metadata.add(new GridColumn("action", " ", "html", false));
+		metadata.add(new GridColumn("dns", "DNS Server", "html", false));
+//		metadata.add(new GridColumn("action", " ", "html", false));
 		
 		String[] dns= {"10.0.0.254", "8.8.8.8", "8.8.4.4"};
 		ArrayList<GridData> data=new ArrayList<>();
-		InterfaceDao ifaceDao=new WmiInterfaceDaoImpl();
-		data.add(new GridData("iface_1", ifaceDao.asMap(new InterfaceEntry("Wireless LAN", "10.0.0.254", 24, true, true, "10.0.0.254", dns, "X"))));
-		data.add(new GridData("iface_2", ifaceDao.asMap(new InterfaceEntry("LAN", "10.0.0.2", 24, false, false, "10.0.0.254", dns, "X"))));
+		InterfaceDao ifaceDao=new InterfaceDaoWmicImpl();
+		ifaceDao.getAllInterfaces();
+		for (InterfaceEntry iface : ifaceDao.getAllInterfaces()) {
+			data.add(new GridData("iface_1", ifaceDao.asMap(iface)));
+			
+		}
+//		data.add(new GridData("iface_2", ifaceDao.asMap(new InterfaceEntry("LAN", "10.0.0.2", 24, false, false, "10.0.0.254", dns, "X"))));
 		Grid grid=new Grid(metadata, data);
 		
 		return grid;

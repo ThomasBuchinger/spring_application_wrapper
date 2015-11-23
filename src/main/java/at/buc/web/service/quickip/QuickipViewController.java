@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import at.buc.framework.web.ui.DefaultViewController;
+import at.buc.framework.web.service.ui.DefaultViewController;
 
 
 @Controller
