@@ -27,7 +27,7 @@ A simple webapplication to change the servers (usually my laptop) IP address. Go
 * Elasticsearch (or Lucene?)
 * Spring Data
 * Configuration Management
-* Script Interpreter embedded oin Java (Perl, Python?, Bash, Powershell/cmd)
+* Script Interpreter embedded in Java (Perl, Python?, Bash, Powershell/cmd)
 * Out-of-The-Box Memory Cache (Apache Commons JCS - https://commons.apache.org/proper/commons-jcs/)
 
 ### MISC
