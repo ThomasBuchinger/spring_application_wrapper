@@ -13,11 +13,12 @@ A simple webapplication to change the servers (usually my laptop) IP address. Go
 # Included Projects
 |Project|Note|License|URL|
 |---|---|---|---|
-|Spring Framework| Core, Boot, MVC | Apache License 2.0
-|Apache Commons| Exec | | Apache License 2.0
-* Bootstrap (SBAdmin Template (Apache 2.0)) (MIT) 
-* editable-grid (Dual licensed under the MIT or GPL Version 2 licenses.)
-* XOM (LGPLv2.1)
+| Spring Framework | Core, Boot, MVC | Apache License 2.0 | https://spring.io/ |
+| Apache Commons Exec |  | Apache License 2.0 | https://commons.apache.org/proper/commons-exec/index.html |
+| Bootstrap | | MIT | http://getbootstrap.com/ |
+| SB Admin | Bootstrab template | Apache 2.0 | http://startbootstrap.com/template-overviews/sb-admin/ |
+| editable-grid | JS table rendering lib | Dual licensed under the MIT or GPL Version 2 licenses.| http://www.editablegrid.net/en/ |
+| XOM | Java XML processing lib | LGPLv2.1 | http://www.xom.nu/ |
 
 # Stuff to do
 ### Services
