@@ -5,17 +5,19 @@ A microservice collection providing some (hopefully) useful services out-of-the-
 ### ApplicationWrapper
 A Webservice wrapping native Applications on the Server and making them available on the Network. It executes a command (via Apache Commons Exec) on the Server and returns the content of STDOUT and STDERR stream as BASE64 encoded String.
 ### Dashboard-Template (work-in-progress)
-A Webapplication providing a pretty UI using Spring MVC and REST endpoints for modifying navigation, alerts, user information. Other webservices can use this template and focus on implementing the main section of the page
+A Webapplication providing a pretty UI using Spring MVC and REST endpoints for modifying navigation, alerts, user information. Other webservices can use this template and focus on implementing the main section of the page 
 ### QuickIP Webapplication (work-in-progress)
 A simple webapplication to change the servers (usually my laptop) IP address. Goal is to have something actual useable and I have to change my IP address far to often to use the OS way...
 
 
 # Included Projects
-* Spring Framework (Core, Boot, MVC)
-* Apache Commons Exec
-* Bootstrap (SBAdmin Template)
-* editable-grid
-* XOM
+|Project|Note|License|URL|
+|---|---|---|---|
+|Spring Framework| Core, Boot, MVC | Apache License 2.0
+|Apache Commons| Exec | | Apache License 2.0
+* Bootstrap (SBAdmin Template (Apache 2.0)) (MIT) 
+* editable-grid (Dual licensed under the MIT or GPL Version 2 licenses.)
+* XOM (LGPLv2.1)
 
 # Stuff to do
 ### Services
@@ -25,6 +27,7 @@ A simple webapplication to change the servers (usually my laptop) IP address. Go
 * Spring Data
 * Configuration Management
 * Script Interpreter embedded oin Java (Perl, Python?, Bash, Powershell/cmd)
+* Out-of-The-Box Memory Cache (Apache Commons JCS - https://commons.apache.org/proper/commons-jcs/)
 
 ### MISC
 * Making Exec fit for Interactive Process Communication
