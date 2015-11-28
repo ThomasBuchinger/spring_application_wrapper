@@ -1,76 +1,71 @@
 package at.buc.web.service.quickip;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 
+
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import at.buc.framework.utils.ObjectManipulation;
 import at.buc.framework.web.service.ui.grid.Grid;
 import at.buc.framework.web.service.ui.grid.GridColumn;
 import at.buc.framework.web.service.ui.grid.GridData;
 import at.buc.web.service.quickip.data.InterfaceEntry;
 import at.buc.web.service.quickip.data.RouteEntry;
-import at.buc.web.service.quickip.data.dao.InterfaceDao;
-import at.buc.web.service.quickip.data.dao.InterfaceDaoWmiToolImpl;
+import at.buc.web.service.quickip.data.dao.EntryDao;
 import at.buc.web.service.quickip.data.dao.InterfaceDaoWmicImpl;
 
 @RestController
 public class QuickipRestController {
 
+	QuickipService service=new QuickipService();
+	
 	@RequestMapping("/api/quickip")
 	public Object get() {
 		return "unfinished - Here should be an HATEOS Endpoint Description pointing to everything that is available as part of Quick IP";
 	}
 	
 	@RequestMapping("/api/quickip/debug")
-	public Object debug_endpoint() {
-		ArrayList<GridColumn> metadata=new ArrayList<>();
-		metadata.add(new GridColumn("NetConnectionID", "Interface", "string", false));
-		metadata.add(new GridColumn("IPAddress", "IP Address", "string", true));
-		metadata.add(new GridColumn("IPSubnet", "Mask", "integer", true));
-		metadata.add(new GridColumn("NetEnabled", "Active", "boolean", true));
-		metadata.add(new GridColumn("Availability", "Connected", "boolean", false));
-		metadata.add(new GridColumn("IPDefaultGateway", "Gateway", "string", false));
-		metadata.add(new GridColumn("DNSName", "DNS Server", "html", false));
-//		metadata.add(new GridColumn("action", " ", "html", false));
-		
-		String[] dns= {"10.0.0.254", "8.8.8.8", "8.8.4.4"};
-		ArrayList<GridData> data=new ArrayList<>();
-		InterfaceDao ifaceDao=new InterfaceDaoWmiToolImpl();
-		for (InterfaceEntry iface : ifaceDao.getAllInterfaces()) {
-			data.add(new GridData("iface_1", ifaceDao.asMap(iface)));
-			
+	public Object debug_endpoint(@RequestParam(value="ifaces", required=true)String [] iface_names) {
+		ArrayList<InterfaceEntry> ifaces=new ArrayList<>();
+		for (String iface_name : iface_names) {
+			System.err.println("[REQUEST-Interface]: "+iface_name);
+			ifaces.addAll(service.getInterfacesForName(iface_name));
 		}
-//		data.add(new GridData("iface_2", ifaceDao.asMap(new InterfaceEntry("LAN", "10.0.0.2", 24, false, false, "10.0.0.254", dns, "X"))));
-		Grid grid=new Grid(metadata, data);
 		
-		return grid;
+		ArrayList<Map<String, Object>> toReturn=new ArrayList<>();
+		InterfaceDaoWmicImpl dao=new InterfaceDaoWmicImpl();
+		for (InterfaceEntry iface : ifaces) {
+			toReturn.add(dao.asMap(iface));
+		}
+		return toReturn;
 	}
 	
 	@RequestMapping("/api/quickip/grid/iface")
 	public Object getIfaceTable() {
 		ArrayList<GridColumn> metadata=new ArrayList<>();
-		metadata.add(new GridColumn("name", "Interface", "string", false));
+		metadata.add(new GridColumn("name", "ID", "string", true));
+		metadata.add(new GridColumn("connectionID", "Interface", "string", false));
 		metadata.add(new GridColumn("ip", "IP Address", "string", true));
 		metadata.add(new GridColumn("mask", "Mask", "integer", true));
-		metadata.add(new GridColumn("active", "Active", "boolean", true));
+		metadata.add(new GridColumn("iface_enabled", "Active", "boolean", true));
+		metadata.add(new GridColumn("dhcp_enabled", "DHCP", "boolean", true));
 		metadata.add(new GridColumn("connected", "Connected", "boolean", false));
 		metadata.add(new GridColumn("gateway", "Gateway", "string", false));
 		metadata.add(new GridColumn("dns", "DNS Server", "html", false));
-//		metadata.add(new GridColumn("action", " ", "html", false));
+		metadata.add(new GridColumn("action", " ", "html", false));
+		metadata.add(new GridColumn("isTemplate", "T", "boolean", false));
 		
 		String[] dns= {"10.0.0.254", "8.8.8.8", "8.8.4.4"};
 		ArrayList<GridData> data=new ArrayList<>();
-		InterfaceDao ifaceDao=new InterfaceDaoWmicImpl();
-		ifaceDao.getAllInterfaces();
-		for (InterfaceEntry iface : ifaceDao.getAllInterfaces()) {
-			data.add(new GridData("iface_1", ifaceDao.asMap(iface)));
-			
+		EntryDao dao=new InterfaceDaoWmicImpl();
+		for (InterfaceEntry iface : service.getInterfacesForName("wlan_bridge")) {
+			data.add(new GridData(iface.getUuid(), dao.asMap(iface) ));
 		}
-//		data.add(new GridData("iface_2", ifaceDao.asMap(new InterfaceEntry("LAN", "10.0.0.2", 24, false, false, "10.0.0.254", dns, "X"))));
+		for (InterfaceEntry iface : service.getInterfacesForName("Ethernet")) {
+			data.add(new GridData(iface.getUuid(), dao.asMap(iface) ));
+		}
 		Grid grid=new Grid(metadata, data);
 		
 		return grid;

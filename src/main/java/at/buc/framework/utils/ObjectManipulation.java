@@ -1,21 +1,23 @@
 package at.buc.framework.utils;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import at.buc.web.service.quickip.data.InterfaceEntry;
 
-
 public abstract class ObjectManipulation {
-		
+
 	public static Object updateValues(Object original, Object update, Class<?> c) {
-		Field[] fields=c.getFields();
+		Field[] fields = c.getFields();
 		try {
 			for (Field field : fields) {
-				Object val=field.get(c.cast(update));
+				Object val = field.get(c.cast(update));
 				if (val != null) {
-						field.set(original, val);
+					field.set(original, val);
 				}
 			}
 		} catch (IllegalArgumentException e) {
@@ -28,11 +30,22 @@ public abstract class ObjectManipulation {
 		return original;
 	}
 
-	public static Map<String, Object> asMap(Object obj, Class<?> c){
-		Field[] fields=c.getFields();
-		HashMap<String, Object> ret=new HashMap<>();
+	public static Field[] getAllFields(Class c) {
+		List<Field> fields = new ArrayList<Field>();
+		fields.addAll(Arrays.asList(c.getDeclaredFields()));
+		if (c.getSuperclass() != null) {
+			fields.addAll(Arrays.asList(getAllFields(c.getSuperclass())));
+		}
+		return fields.toArray(new Field[]{});
+	}
+
+	public static Map<String, Object> asMap(Object obj, Class<?> c) {
+		Field[] fields = getAllFields(c);
+
+		HashMap<String, Object> ret = new HashMap<>();
 		try {
 			for (Field field : fields) {
+				field.setAccessible(true);
 				ret.put(field.getName(), field.get(obj));
 			}
 		} catch (IllegalArgumentException e) {
@@ -44,18 +57,5 @@ public abstract class ObjectManipulation {
 		}
 		return ret;
 	}
-	
-//	@Override
-//	public HashMap<String, Object> asMap(InterfaceEntry iface){
-//		HashMap<String, Object> ret=new HashMap<>();
-//		ret.put("name", iface.getName());
-//		ret.put("ip", iface.getIp());
-//		ret.put("mask", String.valueOf(iface.getMask()));
-//		ret.put("active", String.valueOf(iface.isActive()));
-//		ret.put("connected", String.valueOf(iface.isConnected()));
-//		ret.put("gateway", iface.getGateway());
-//		ret.put("dnsserver", String.join(", ", iface.getDnsServer()));
-//		ret.put("action", iface.getAction());
-//		return ret;
-//	}
+
 }

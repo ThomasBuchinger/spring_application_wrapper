@@ -47,7 +47,6 @@
 			ifacegrid.tableLoaded = function() { this.renderGrid("iface_table", "grid"); };
 			ifacegrid.loadJSON("/api/quickip/grid/iface");
 			
-			
 			routegrid = new EditableGrid("InterfaceGrid"); 
 			routegrid.tableLoaded = function() { this.renderGrid("route_table", "grid"); };
 			routegrid.loadJSON("/api/quickip/grid/route");
@@ -59,7 +58,7 @@
 		}
 		setInterval(function(){ 
 			loadGrids() 
-		}, 30000);
+		}, 10000);
 	</script>
 	
 </head>
@@ -86,8 +85,8 @@
 		<label>Interfaces:</label> <br />
 		<div id="iface_table"></div>
 		
-		<label>Routing: </label> <br />
-		<div id="route_table"></div>
+		<!--<label>Routing: </label> <br />
+		<div id="route_table"></div>-->
 		
 	</div>
 	<!-- /.container-fluid -->

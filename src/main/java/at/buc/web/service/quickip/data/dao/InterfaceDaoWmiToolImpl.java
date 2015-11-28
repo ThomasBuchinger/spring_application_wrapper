@@ -23,8 +23,8 @@ import at.buc.web.service.quickip.data.InterfaceEntry;
  * ============================================================================
 */
 
-
-public class InterfaceDaoWmiToolImpl implements InterfaceDao{
+/*
+public class InterfaceDaoWmiToolImpl implements EntryDao{
 	public static final String binPath="src/main/resources/bin/";
 	
 	private static final Logger logger=LoggerFactory.getLogger(InterfaceDaoWmiToolImpl.class);
@@ -117,13 +117,12 @@ public class InterfaceDaoWmiToolImpl implements InterfaceDao{
 		
 		ArrayList<InterfaceEntry> ret=new ArrayList<>();
 		for (WmiToolInterface iface: adapterList.values()) {
-			ret.add(new InterfaceEntry(iface.NetConnectionID, iface.IPAddress.split(",")[0], 24, true, Boolean.parseBoolean(iface.NetEnabled), Boolean.parseBoolean(iface.Availability), iface.DefaultIPGateway, "8.8.8.8,8.8.4.4".split(","), "X"));
 		}
 		return ret;
 	}
 
 	@Override
-	public void updateInterface(InterfaceEntry original, InterfaceEntry update) {
+	public void updateInterface(InterfaceEntry updatedIface) {
 		
 	}
 
@@ -161,3 +160,4 @@ public class InterfaceDaoWmiToolImpl implements InterfaceDao{
 		
 	}
 }
+*/
