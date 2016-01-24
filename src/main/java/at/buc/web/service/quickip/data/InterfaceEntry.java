@@ -3,7 +3,6 @@ package at.buc.web.service.quickip.data;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * This class holds an interface configuration. The configuration can be 
@@ -24,9 +23,8 @@ public class InterfaceEntry extends AbstractEntry{
 	private List<String> dnsServer;
 	
 	
-	public InterfaceEntry(String name, String NetConnectionID, String ip, int mask, boolean active, boolean dhcp_enabled, String gateway, String[] dnsserver, String action, boolean isTemplate) {
-		super(name, action, isTemplate);
-		this.connectionID=NetConnectionID;
+	public InterfaceEntry(String name, String NetConnectionID, String ip, int mask, boolean active, boolean dhcp_enabled, String gateway, String[] dnsserver,  boolean isTemplate) {
+		this(name, NetConnectionID, isTemplate);
 		this.ip=ip;
 		this.mask=mask;
 		this.iface_enabled=active;
@@ -35,15 +33,17 @@ public class InterfaceEntry extends AbstractEntry{
 		this.gateway=gateway;
 		this.dnsServer=Arrays.asList(dnsserver);
 	}
-	public InterfaceEntry(String name, String NetConnectionID, String action, boolean isTemplate) {
-		super(name, action, isTemplate);
+	public InterfaceEntry(String name, String NetConnectionID, boolean isTemplate) {
+		super(name, isTemplate);
 		this.connectionID=NetConnectionID;
+		this.action=String.format("/api/quickip/iface/%s", NetConnectionID);
 		dnsServer=new ArrayList<>();
 	}
 
 	public void addDnsServer(String dns){
 		dnsServer.add(dns);
 	}
+
 	
 //	===== GETTERS & SETTERS ======================================
 	
@@ -126,14 +126,10 @@ public class InterfaceEntry extends AbstractEntry{
 		this.connected = connected;
 	}
 
-
-	public String getUuid() {
-		return uuid;
-	}
-
-
+	@Override
 	public String getAction() {
-		return action;
+		return "/test";
+//		return getLink("self").getHref();
 	}
 
 
@@ -148,9 +144,6 @@ public class InterfaceEntry extends AbstractEntry{
 	public String[] getDnsServer() {
 		return (String[]) dnsServer.toArray();
 	}
-
-
-
 
 	public void setDnsServer(String[] dnsServer) {
 		this.dnsServer = Arrays.asList(dnsServer);

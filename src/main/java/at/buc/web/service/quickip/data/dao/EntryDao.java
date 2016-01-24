@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Map;
 
 import at.buc.web.service.quickip.data.AbstractEntry;
-import at.buc.web.service.quickip.data.InterfaceEntry;
 
 public interface EntryDao {
 	public Map<String, Object> asMap (AbstractEntry entry);

@@ -61,6 +61,7 @@ public class ApplicationExecutor extends DefaultExecuteResultHandler{
 		exec_end=new Date().getTime();
 	}
 	
+	@Override
 	public void waitFor() throws InterruptedException {
 		super.waitFor();
 		exec_end=new Date().getTime();

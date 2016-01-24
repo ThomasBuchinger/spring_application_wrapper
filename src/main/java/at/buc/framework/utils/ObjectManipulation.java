@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import at.buc.web.service.quickip.data.InterfaceEntry;
-
 public abstract class ObjectManipulation {
 
 	public static Object updateValues(Object original, Object update, Class<?> c) {

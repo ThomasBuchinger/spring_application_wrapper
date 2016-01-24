@@ -1,4 +1,4 @@
-package at.buc.framework.web.service.ui.grid;
+package at.buc.framework.web.service.ui.editable_grid;
 
 import java.util.Map;
 

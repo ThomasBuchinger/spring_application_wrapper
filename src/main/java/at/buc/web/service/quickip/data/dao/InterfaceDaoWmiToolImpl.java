@@ -1,20 +1,5 @@
 package at.buc.web.service.quickip.data.dao;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.client.RestTemplate;
-
-import at.buc.framework.utils.ObjectManipulation;
-import at.buc.framework.web.service.application_wrapper.ApplicationWrapperRestClient;
-import at.buc.web.service.quickip.data.InterfaceEntry;
-
 /*=============================================================================
  * BROKEN
  *=============================================================================
