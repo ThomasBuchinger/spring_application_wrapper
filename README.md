@@ -24,10 +24,11 @@ A simple webapplication to change the servers (usually my laptop) IP address. Go
 ### Services
 * Embedded REDIS Datastore
 * JavaSpaces (Apache River, Gigaspace)
-* Elasticsearch (or Lucene?)
+* Elasticsearch
 * Spring Data
+* Configuration via Jython Scripting: [#10](https://github.com/ThomasBuchinger/spring_application_wrapper/issues/10)
 * Configuration Management
-* Script Interpreter embedded in Java (Perl, Python?, Bash, Powershell/cmd)
+* Script Interpreter embedded in Java (Perl, Bash, Powershell/cmd)
 * Out-of-The-Box Memory Cache (Apache Commons JCS - https://commons.apache.org/proper/commons-jcs/)
 
 See Issues https://github.com/ThomasBuchinger/spring_application_wrapper/issues
