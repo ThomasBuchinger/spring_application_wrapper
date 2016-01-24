@@ -30,14 +30,8 @@ A simple webapplication to change the servers (usually my laptop) IP address. Go
 * Script Interpreter embedded in Java (Perl, Python?, Bash, Powershell/cmd)
 * Out-of-The-Box Memory Cache (Apache Commons JCS - https://commons.apache.org/proper/commons-jcs/)
 
-### MISC
-* Making Exec fit for Interactive Process Communication
-* Build a REST API to display Alerts, Navbar und User information on the Default Dashboard (SB-Admin)
-* Rename this repo to something more descriptive
-* Make a lot more use of Spring boot within the framework
-* Add logging
-* Refactor Project (framework) to only start services really in use (Spring-Boot?)
+See Issues https://github.com/ThomasBuchinger/spring_application_wrapper/issues
 
 
 # Note
-This project mostly an exercise for webapplications using Spring Framework.
+This project mostly an exercise for webapplications using Spring Framework, but by now it is pretty big.
