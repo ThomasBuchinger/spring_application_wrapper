@@ -1,0 +1,2 @@
+---
+application_wapper.client.url_template: http://127.0.0.3:8080/api/exec?cmd={cmd}

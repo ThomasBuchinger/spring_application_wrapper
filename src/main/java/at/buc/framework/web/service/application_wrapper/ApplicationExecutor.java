@@ -65,11 +65,11 @@ public class ApplicationExecutor extends DefaultExecuteResultHandler{
 	public void waitFor() throws InterruptedException {
 		super.waitFor();
 		exec_end=new Date().getTime();
-		stdout=stdout_stream.toString();
-		stderr=stderr_stream.toString();
+		stdout=stdout_stream.toString().trim().replaceAll("\r\n", "\n");
+		stderr=stderr_stream.toString().trim().replaceAll("\r\n", "\n");
 
-		stdout_base64=Base64.getEncoder().encodeToString(stdout_stream.toString().getBytes());
-		stderr_base64=Base64.getEncoder().encodeToString(stderr_stream.toString().getBytes());
+		stdout_base64=Base64.getEncoder().encodeToString(stdout.getBytes());
+		stderr_base64=Base64.getEncoder().encodeToString(stderr.getBytes());
 	}
 	
 	public Map<String, Object> asMap(){
